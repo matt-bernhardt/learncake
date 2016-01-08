@@ -152,7 +152,7 @@
 /**
  * A random string used in security hashing methods.
  */
-	Configure::write('Security.salt', 'DYhG93b0qyJfIxfs2guVoUubWwvniR2G0FgaC9mi');
+	Configure::write('Security.salt', '2CFF6JTkRgA1OgVmjuO9X2flmLBYuMrYl3IXwqz2');
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).
  * Will append a querystring parameter containing the time the file was modified. This is
@@ -242,4 +242,6 @@
  *
  */
 	Cache::config('default', array('engine' => 'File'));
+
+	date_default_timezone_set('America/New_York');
 ?>
