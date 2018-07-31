@@ -1,9 +1,8 @@
 <?php
-/* SVN FILE: $Id$ */
 /**
- * Short description for file.
+ * Index
  *
- * Long description for file
+ * The Front Controller for handling every request
  *
  * PHP versions 4 and 5
  *
@@ -18,10 +17,7 @@
  * @package       cake
  * @subpackage    cake.app.webroot
  * @since         CakePHP(tm) v 0.2.9
- * @version       $Revision$
- * @modifiedby    $LastChangedBy$
- * @lastmodified  $Date$
- * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
+ * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 /**
  * Use the DS to separate the directories in other defines
@@ -77,6 +73,9 @@
 			define('CORE_PATH', CAKE_CORE_INCLUDE_PATH . DS);
 		}
 	}
+	if (php_sapi_name() == 'cli-server') {
+		$_SERVER['PHP_SELF'] = '/'.basename(__FILE__);
+	}
 	if (!include(CORE_PATH . 'cake' . DS . 'bootstrap.php')) {
 		trigger_error("CakePHP core could not be found.  Check the value of CAKE_CORE_INCLUDE_PATH in APP/webroot/index.php.  It should point to the directory containing your " . DS . "cake core directory and your " . DS . "vendors root directory.", E_USER_ERROR);
 	}
@@ -84,9 +83,5 @@
 		return;
 	} else {
 		$Dispatcher = new Dispatcher();
-		$Dispatcher->dispatch($url);
+		$Dispatcher->dispatch();
 	}
-	if (Configure::read() > 0) {
-		echo "<!-- " . round(getMicrotime() - $TIME_START, 4) . "s -->";
-	}
-?>
